@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Log-In{% endblock title %}
+
+{% block content %}
+    <h1>LogIn</h1>
+        {% if form.errors %}
+            <p>
+                Your Username and Password Didnt match
+                Please Try again
+            </p>
+        {% else %}
+            <p>Please,Use the following form to log in:
+                If you dont have account <a href='{% url 'register' %}'>Register Here</a>
+            </p>
+
+        {% endif %}
+    <div class="login-form">
+
+        <form action="{% url 'login' %}" method="post">
+            {{form.as_p}}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{next}}" />
+            <input type="submit" value="Log-in"></p>
+        </form>
+
+
+        <p>
+            <a href="{% url 'password_reset' %}">
+                Forgetten Your Password
+            </a>
+        </p>
+    
+    
+    </div>
+
+{% endblock content %}
